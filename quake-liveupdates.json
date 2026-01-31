@@ -13,7 +13,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"set -e; export GIT_TERMINAL_PROMPT=0; ROOT=\\\"{{$FullRootDir}}\\\"; BASE=\\\"{{$FullBaseDir}}\\\"; cd \\\"$ROOT\\\"; rm -rf minqlx_build; git clone --depth 1 https://github.com/MinoMino/minqlx.git minqlx_build; cd minqlx_build; PYCONFIG=$(ls /usr/bin/python3.*-config 2>/dev/null | head -1); if [ -n \\\"$PYCONFIG\\\" ]; then mkdir -p .path && ln -sf \\\"$PYCONFIG\\\" .path/python3-config && export PATH=\\\"$PWD/.path:$PATH\\\"; fi; make; cp -f bin/* \\\"$BASE\\\"; cd \\\"$ROOT\\\"; rm -rf minqlx_build; echo minqlx built and copied\"",
+        "UpdateSourceArgs": "-c \"set -e; export GIT_TERMINAL_PROMPT=0; ROOT=\\\"{{$FullRootDir}}\\\"; BASE=\\\"{{$FullBaseDir}}\\\"; cd \\\"$ROOT\\\"; rm -rf minqlx_build; git clone --depth 1 https://github.com/MinoMino/minqlx.git minqlx_build; cd minqlx_build; PYCONFIG=$(ls /usr/bin/python3.*-config 2>/dev/null | head -1); if [ -n \\\"$PYCONFIG\\\" ]; then mkdir -p .path && ln -sf \\\"$PYCONFIG\\\" .path/python3-config && export PATH=\\\"$PWD/.path:$PATH\\\"; export CPPFLAGS=\\\"$($PYCONFIG --includes 2>/dev/null) $CPPFLAGS\\\"; fi; make; cp -f bin/* \\\"$BASE\\\"; cd \\\"$ROOT\\\"; rm -rf minqlx_build; echo minqlx built and copied\"",
         "UpdateSourceConditionSetting": "InstallMinqlx",
         "UpdateSourceConditionValue": "1",
         "SkipOnFailure": false
