@@ -1,9 +1,9 @@
 {
-	"id": "ec280171-c67b-4cf8-923f-dc27fea91ee1",
-	"authors": ["CubeCoders Limited", "AMP Community"],
-	"origin": "https://github.com/CubeCoders/AMPTemplates.git",
-	"url": "https://github.com/CubeCoders/AMPTemplates",
+	"id": "a7b3c8d2-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+	"authors": ["CubeCoders Limited", "AMP Community", "tutejshy-bit"],
+	"origin": "https://github.com/tutejshy-bit/AMPTemplates.git",
+	"url": "https://github.com/tutejshy-bit/AMPTemplates",
 	"imagefile": "",
-	"prefix": "",
+	"prefix": "tutejshy-bit",
 	"repotype": "AppTemplates"
 }
