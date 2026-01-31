@@ -3,7 +3,7 @@
         "DisplayName": "minqlx (LD_PRELOAD)",
         "Category": "Quake Live:stadia_controller",
         "Subcategory": "Server:dns:1",
-        "Description": "Load minqlx plugin framework via LD_PRELOAD. Requires minqlx libraries in the server directory. Use \"Install minqlx on Update\" to build from source during Update, or copy pre-built minqlx.x64.so / minqlx.x86.so into the server directory (e.g. qlds/349090/) manually.",
+        "Description": "Enable or disable loading minqlx plugin framework via LD_PRELOAD. minqlx is built automatically when you run Update; this setting only controls whether the server starts with minqlx x64, x86, or without minqlx.",
         "Keywords": "minqlx,preload,plugin,redis,zmq",
         "FieldName": "minqlx_preload",
         "InputType": "enum",
@@ -13,21 +13,6 @@
             "": "No minqlx",
             "minqlx.x64.so": "minqlx x64",
             "minqlx.x86.so": "minqlx x86"
-        }
-    },
-    {
-        "DisplayName": "Install minqlx on Update",
-        "Category": "Quake Live:stadia_controller",
-        "Subcategory": "Server:dns:1",
-        "Description": "When enabled, running Update will clone https://github.com/MinoMino/minqlx, build it (make), and copy the .so files into the server directory. Requires build-essential and git (included in container). If unchecked, you can place pre-built minqlx.x64.so / minqlx.x86.so in the server directory manually.",
-        "Keywords": "minqlx,install,build,update",
-        "FieldName": "InstallMinqlx",
-        "InputType": "checkbox",
-        "ParamFieldName": "InstallMinqlx",
-        "DefaultValue": "0",
-        "EnumValues": {
-            "False": "0",
-            "True": "1"
         }
     },
     {
