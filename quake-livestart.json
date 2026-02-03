@@ -1,0 +1,26 @@
+[
+    {
+        "UpdateStageName": "minqlx Build",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"set -e; export GIT_TERMINAL_PROMPT=0; ROOT=\\\"{{$FullRootDir}}\\\"; BASE=\\\"{{$FullBaseDir}}\\\"; cd \\\"$BASE\\\"; if [ ! -f minqlx.x64.so ] && [ ! -f minqlx.x86.so ]; then cd \\\"$ROOT\\\"; rm -rf minqlx_build; git clone --depth 1 https://github.com/MinoMino/minqlx.git minqlx_build; cd minqlx_build; PYCONFIG=$(ls /usr/bin/python3.*-config 2>/dev/null | head -1); if [ -n \\\"$PYCONFIG\\\" ]; then mkdir -p .path && ln -sf \\\"$PYCONFIG\\\" .path/python3-config && export PATH=\\\"$PWD/.path:$PATH\\\"; mkdir -p include; for d in /usr/include/python3.*; do [ -d \\\"$d\\\" ] && ln -sfn \\\"$d\\\" \\\"include/$(basename $d)\\\" && break; done; fi; make; cp -f bin/* \\\"$BASE\\\"; cd \\\"$ROOT\\\"; rm -rf minqlx_build; echo minqlx built; else echo minqlx already present, skipping build; fi; cd \\\"$BASE\\\"; if [ ! -d minqlx-plugins ] || [ ! -d minqlx-plugins/.git ]; then git clone --depth 1 https://github.com/MinoMino/minqlx-plugins.git; export PIP_BREAK_SYSTEM_PACKAGES=1; python3 -m pip install --break-system-packages -r minqlx-plugins/requirements.txt -q; echo minqlx-plugins installed; else echo minqlx-plugins already present, skipping; fi; echo minqlx and plugins ready\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Start Redis",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"redis-cli ping 2>/dev/null | grep -q PONG && exit 0 || redis-server --daemonize yes\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Wait For Redis",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"timeout=15; while ((timeout--)); do redis-cli ping 2>/dev/null | grep -q PONG && exit 0; sleep 1; done; echo 'Redis failed to start'; exit 1\"",
+        "SkipOnFailure": false
+    }
+]
